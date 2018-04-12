@@ -36,12 +36,15 @@ export class AppComponent implements OnInit {
     });
     this.dataSvc.saveTodos(newTodos).subscribe(data => {
       this.todo = '';
+      this.todos = data;
     });
   }
 
   clearCompleted () {
     let newTodos = this.todos.filter(item => !item.done);
-    this.dataSvc.saveTodos(newTodos).subscribe(data => {});
+    this.dataSvc.saveTodos(newTodos).subscribe(data => {
+      this.todos = data;
+    });
   }
 
   filterTypeChanged (filterType: string) {
@@ -53,18 +56,22 @@ export class AppComponent implements OnInit {
     newTodos.forEach(item => {
       item.done = value;
     });
-    this.dataSvc.saveTodos(newTodos).subscribe(data => {});
+    this.dataSvc.saveTodos(newTodos).subscribe(data => {
+    });
   }
 
   updateToggleAllState () {
     this.toggleAll = this.todos.filter(item => !item.done).length === 0;
-    this.dataSvc.saveTodos(this.todos).subscribe(data => {});
+    this.dataSvc.saveTodos(this.todos).subscribe(data => {
+    });
   }
 
   removeTodo (item)  {
     let newTodos = [...this.todos];
     newTodos.splice(this.todos.indexOf(item), 1);
-    this.dataSvc.saveTodos(newTodos).subscribe(data => {});
+    this.dataSvc.saveTodos(newTodos).subscribe(data => {
+      this.todos = data;
+    });
   }
 
 
